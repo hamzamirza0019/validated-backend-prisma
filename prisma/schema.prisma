@@ -5,7 +5,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -15,17 +14,28 @@ datasource db {
 
 
 model User { 
-  id    String  @id @default(auto()) @map("_id") @db.ObjectId
-  email String  @unique
-  name  String?
-  password String 
-  posts Post[]
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  name      String?
+  password  String 
+  posts     Post[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 } 
+
 model Post { 
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   title     String
-  slug      String
+  slug      String   @unique
   body      String
-  author    User    @relation(fields: [authorId], references: [id]) 
-  authorId  String  @db.ObjectId
+  published Boolean @default(false)
+
+  author    User     @relation(fields: [authorId], references: [id]) 
+  authorId  String   @db.ObjectId
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([authorId])
 }
