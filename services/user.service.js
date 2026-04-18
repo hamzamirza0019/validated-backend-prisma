@@ -5,3 +5,19 @@ export const createUserService = async ( data)=>{
         data :data
     });
 };
+
+export const getUserWithPostsService = async (userId) =>{
+    return await prisma.user.findUnique({
+        where: {id: userId},
+        include: {
+            posts: {
+                select:{
+                    title: true,
+                    slug: true,
+                    published: true
+                }
+            }
+        }
+    });
+};
+

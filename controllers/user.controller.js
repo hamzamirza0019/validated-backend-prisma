@@ -1,4 +1,4 @@
-import { createUserService } from "../services/user.service.js";
+import { createUserService, getUserWithPostsService } from "../services/user.service.js";
 import { ApiResponce } from "../utility/ApiResponce.js";
 import { asyncHandler } from "../utility/asyncHandler.js";
 
@@ -13,4 +13,17 @@ export const createUserController = asyncHandler(async(req, res)=>{
     .json(
         new ApiResponce(201, user, "User created successfully...")
     );
+});
+
+export const getUserWithPostController = asyncHandler(async(req, res)=>{
+    const {id} = req.params;
+
+    const user = await getUserWithPostsService(id);
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponce(201, user, "User fetched successfully...")
+    );
+
 })
