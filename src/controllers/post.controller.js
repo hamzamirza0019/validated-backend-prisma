@@ -1,5 +1,5 @@
 import { createPostService , getFilteredPostsService, getPostsbySlugService} from "../services/post.service.js";
-import { asyncHandler } from "../utility/asyncHandler.js";
+import {asyncHandler} from "../utility/asyncHandler.js"
 import { ApiResponce } from "../utility/ApiResponce.js";
 import { ApiError } from "../utility/ApiError.js";
 
