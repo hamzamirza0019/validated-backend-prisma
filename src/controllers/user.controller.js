@@ -23,7 +23,7 @@ export const getUserWithPostController = asyncHandler(async(req, res)=>{
     return res
     .status(200)
     .json(
-        new ApiResponce(201, user, "User fetched successfully...")
+        new ApiResponce(200, user, "User fetched successfully...")
     );
 
 })

@@ -2,7 +2,13 @@ import prisma from "../config/db.js";
 
 export const createUserService = async ( data)=>{
     return await prisma.user.create({
-        data :data
+        data :data,
+        select:{
+            id:true,
+            email:true,
+            name: true,
+            createdAt: true 
+        }
     });
 };
 
