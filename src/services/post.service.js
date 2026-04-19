@@ -16,7 +16,7 @@ export const createPostService = async(data)=>{
     });
 };
 
-export const getPostsbySlugService = async (slug)=>{
+export const getPostBySlugService = async (slug)=>{
     return await prisma.post.findUnique({
         where:{ slug: slug},
         include:{
@@ -42,7 +42,7 @@ export const getFilteredPostsService = async ({search, page = 1, limit = 5})=>{
         orderBy:{
             createdAt: "desc"
         },
-        skip: (page-1 ) * 5,
-        take: 5
+        skip: (page-1 ) * limit,
+        take: limit
     });
 };

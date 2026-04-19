@@ -1,4 +1,4 @@
-import { createPostService , getFilteredPostsService, getPostsbySlugService} from "../services/post.service.js";
+import { createPostService , getFilteredPostsService, getPostBySlugService} from "../services/post.service.js";
 import {asyncHandler} from "../utility/asyncHandler.js"
 import { ApiResponce } from "../utility/ApiResponce.js";
 import { ApiError } from "../utility/ApiError.js";
@@ -19,10 +19,10 @@ export const createPostController = asyncHandler(async(req, res)=>{
 
 export const getPostBySlugController = asyncHandler(async(req, res) =>{
     const {slug} = req.params;
-    const post = await getPostsbySlugService(slug);
+    const post = await getPostBySlugService(slug);
 
     if( !post ){
-        return new ApiError(404, "Post not found");
+        throw new ApiError(404, "Post not found");
     }else{
         return res
         .status(200)
